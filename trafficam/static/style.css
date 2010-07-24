@@ -1,94 +1,120 @@
-body{
-background:#fff;
-height:auto;
-margin:0;
-padding:0;
-color:#333;
-font:13px "Droid Sans", Helvetica, sans-serif ;
+.hidden {
+  display: none;
 }
 
-#center{
-margin:0 auto;
-width:280px;
-height:auto;
+.shown {
+  display: block;
+}
+
+.showninline {
+  display: inline;
+}
+
+body {
+    background: #fff;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    font: 13px "Droid Sans", Helvetica, sans-serif ;
+}
+
+#center {
+    margin: 0 auto;
+    width: 280px;
+    height: auto;
 }
 
 #app{
-float:left;
-clear:both;
-width:260px;
-height:380px;
-margin:50px 0;
-padding:10px;
-background:#d8ad02 url(images/bg.png) repeat-x 0 0;
--moz-border-radius:10px;
--webkit-border-radius:10px;
+    float: left;
+    clear: both;
+    width: 260px;
+    height: 380px;
+    margin: 50px 0;
+    padding: 10px;
+    background: #d8ad02 url(bg.png) repeat-x 0 0;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
 }
 
 #credits{
-float:left;
-clear:both;
-width:260px;
-height:auto;
-margin:1px 0;
-padding:0;
-text-align:center;
-font-size:11px;
+    float: left;
+    clear: both;
+    width: 260px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 11px;
 }
-
 
 #logo{
-float:left;
-clear:left;
-width:184px;
-height:27px;
-margin:0;
-background:url(images/logo.png) no-repeat 40px 5px;
+    float: left;
+    clear: left;
+    width: 184px;
+    height: 27px;
+    margin: 0;
+    background: url(logo.png) no-repeat 40px 5px;
 }
 
-#logo a{ float:left; width:184px; height:35px; display:block;}
-
-.cur_location{
-float:left;
-clear:both;
-width:auto;
-height:auto;
-margin:0 0 5px 40px;
-padding:0;
-font-size:12px;
+#logo a {
+    float:left;
+    width:184px;
+    height:35px;
+    display:block;
 }
 
-#content{
-float:left;
-clear:both;
-margin:10px 0 3px 0;
-width:260px;
-height:310px;
-background:#fff;
--moz-border-radius:10px;
+.cur_location {
+    float: left;
+    clear: both;
+    width: auto;
+    height: auto;
+    margin: 0 0 5px 40px;
+    padding: 0;
+    font-size: 12px;
 }
 
-ul.options{
-float:left;
-clear:both;
-width:240px;
-height:auto;
-list-style:none;
-margin:35px 0;
-padding:0;
+.cur_location select {
+    width: 100%;
 }
 
-ul.options li{
-float:left;
-clear:both;
-width:260px;
-display:block;
-margin:20px 0 0 0;
-font-size:25px;
-height:80px;
+#content {
+    float: left;
+    clear: both;
+    margin: 10px 0 3px 0;
+    width: 260px;
+    height: 310px;
+    background: #fff;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
 }
 
-a{ color:#333; text-decoration:none; }
+ul.options {
+    float: left;
+    clear: both;
+    width: 240px;
+    height: auto;
+    list-style: none;
+    margin: 35px 0;
+    padding: 0;
+}
+
+ul.options li {
+    float:left;
+    clear:both;
+    width:260px;
+    display:block;
+    margin:20px 0 0 0;
+    font-size:25px;
+    height:80px;
+}
+
+a {
+    color:#333;
+    text-decoration:none;
+}
 
 ul.options li:hover{ background-color:#eee;}
 
@@ -96,14 +122,14 @@ ul.options li:last-child{ margin-bottom:0;}
 
 ul.options li a{ float:left; clear:both; display:block; width:175px; height:80%; padding:25px 0 0 85px;}
 
-.traffic{ background:url(images/traffic.png) no-repeat 20px 15px;  }
-.parking{ background:url(images/car.png) no-repeat 20px 15px;}
+.traffic{ background:url(traffic.png) no-repeat 20px 15px;  }
+.parking{ background:url(car.png) no-repeat 20px 15px;}
 
 select{ font-size:11px;}
 
 
-h1.traffic{ float:left; clear:left; width:100%; font-size:24px; color:#aaa; padding:5px 0 0 45px; background:url(images/traffic_small.png) no-repeat 0 0; height:35px; margin:7px 0 0 10px;}
-h1.parking{ float:left; clear:left; width:100%; font-size:24px; color:#aaa; padding:5px 0 0 45px; background:url(images/car_small.png) no-repeat 0 0; height:35px; margin:7px 0 0 10px;}
+h1.traffic{ float:left; clear:left; width:100%; font-size:24px; color:#aaa; padding:5px 0 0 45px; background:url(traffic_small.png) no-repeat 0 0; height:35px; margin:7px 0 0 10px;}
+h1.parking{ float:left; clear:left; width:100%; font-size:24px; color:#aaa; padding:5px 0 0 45px; background:url(car_small.png) no-repeat 0 0; height:35px; margin:7px 0 0 10px;}
 
 
 a img{ border:0;}
