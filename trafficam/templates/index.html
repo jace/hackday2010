@@ -1,31 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Traffic Cameras</title>
-    <style type="text/css">
-      .hidden {
-        display: none;
-      }
-      .shown {
-        display: block;
-      }
-      .showninline {
-        display: inline;
-      }
-      img.cam {
-        max-width: 100%;
-      }
-    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Traffic Around Me</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css"/>
   </head>
-  <body id="trafficam">
+  <body>
     <script type="text/javascript">
       function selectcam(url, name) {
         var cam = document.querySelector('#cam');
+        var camname = document.querySelector('#camname');
         cam.setAttribute("onerror", "this.onerror = null; this.src = '{{ url_for('static', filename='oops.jpg') }}';");
         cam.setAttribute("alt", name);
         cam.setAttribute("src", url);
+        camname.innerHTML = name;
       }
+
       function setcamlist(data) {
         var sel = document.querySelector('#camlist');
         selectcam(data[0].imgurl, data[0].name);
@@ -46,14 +36,14 @@
         y.innerHTML = result.line1 + ', ' + result.line2;
       }
 
-      function success(position) {
+      function geosuccess(position) {
         var a = document.querySelector('#acquiring');
         var f = document.querySelector('#found');
-        var l = document.querySelector('#location');
+        // var l = document.querySelector('#location');
         var y = document.querySelector('#ylocation');
         a.className = 'hidden';
         f.className = 'shown';
-        l.innerHTML = position.coords.latitude + ', ' + position.coords.longitude;  
+        // l.innerHTML = position.coords.latitude + ', ' + position.coords.longitude;  
 
         var url1 = '{{ url_for('findcamera') }}?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&jsonp=setcamlist';
         var script1 = document.createElement("script");
@@ -68,35 +58,49 @@
         document.body.appendChild(script2);
       }
 
-      function error() {
+      function geoerror() {
         var a = document.querySelector('#acquiring');
         var e = document.querySelector('#found');
         a.className = 'hidden';
         e.className = 'shown';
       }
-
+    </script>
+    <div id="center">
+      <div id="app">
+        <div id="logo">
+          <img src="{{ url_for('static', filename='pin.png') }}"/>
+        </div>
+        <p id="acquiring" class="shown">
+          Acquiring location...
+        </p>
+        <p id="notfound" class="hidden">
+          Your browser does not support geolocation.
+        </p>
+        <div id="found" class="hidden">
+          <div class="cur_location"><select id="camlist"></select></div>
+        </div>
+        <div id="content">
+          <h1 class="traffic">See Traffic</h1>
+          <div class="live_feed">
+            <div>
+              <span id="ylocation">Getting address...</span>
+            </div>
+            <img id="cam" width="250" height="175" src="{{ url_for('static', filename='loading.jpg') }}" alt=""/>
+            <h2 id="camname">&nbsp;</h2>
+          </div>
+          <h1 class="parking" style="margin-left:50px; font-size:18px; padding-top:5px;">
+            <a href="{{ url_for('parking') }}">Find Parking</a>
+          </h1>
+        </div> <!-- content -->
+        <div id="credits">Made at Yahoo! Open Hack Day 2010</div>
+      </div> <!-- app -->
+    </div> <!-- center -->
+    <script type="text/javascript">
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success, error);
+        navigator.geolocation.getCurrentPosition(geosuccess, geoerror);
       } else {
-        error();
+        geoerror();
       }
     </script>
-    <p id="acquiring" class="shown">
-      Acquiring location...
-    </p>
-    <p id="notfound" class="hidden">
-      Your browser does not support geolocation.
-    </p>
-    <div id="found" class="hidden">
-      <p>
-        Your location is <span id="location">unknown</span>. <span id="ylocation">Getting address...</span>
-      </p>
-      <p>
-        <select id="camlist" class="hidden"></select>
-      </p>
-      <p>
-        <img id="cam" width="352" height="288" alt="Traffic image" src="{{ url_for('static', filename='loading.jpg') }}"/>
-      </p>
-    </div>
   </body>
 </html>
