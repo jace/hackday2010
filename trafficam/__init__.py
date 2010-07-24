@@ -20,6 +20,7 @@ def preparedata(cursor, callback=None):
     else:
         return data
 
+
 @app.route('/findcamera')
 def findcamera():
     lat = float(request.args.get('lat', 0))
@@ -30,9 +31,16 @@ def findcamera():
     else:
         return preparedata(db.trafficam.find({"latlon": {"$near": [lat, lon]}}), callback)
 
+
+@app.route('/parking')
+def parking():
+    return "Not implemented"
+
+
 @app.route('/')
-def hello_world():
+def index():
     return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
