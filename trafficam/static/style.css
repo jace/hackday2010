@@ -20,17 +20,17 @@ body {
 }
 
 #center {
-    margin: 0 auto;
-    width: 280px;
-    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 480px;
 }
 
-#app{
+#app {
     float: left;
     clear: both;
-    width: 260px;
-    height: 380px;
-    margin: 50px 0;
+    /* width: 260px;
+    height: 380px; */
+    margin: 0;
     padding: 10px;
     background: #d8ad02 url(bg.png) repeat-x 0 0;
     border-radius: 10px;
@@ -38,18 +38,19 @@ body {
     -webkit-border-radius: 10px;
 }
 
-#credits{
+#credits {
     float: left;
     clear: both;
-    width: 260px;
     height: auto;
     margin: 0;
+    margin-top: 5px;
+    margin-bottom
     padding: 0;
     text-align: center;
     font-size: 11px;
 }
 
-#logo{
+#logo {
     float: left;
     clear: left;
     width: 184px;
@@ -60,7 +61,7 @@ body {
 
 #logo a {
     float:left;
-    width:184px;
+    /* width:184px; */
     height:35px;
     display:block;
 }
@@ -68,7 +69,7 @@ body {
 .cur_location {
     float: left;
     clear: both;
-    width: auto;
+    /* width: auto; */
     height: auto;
     margin: 0 0 5px 40px;
     padding: 0;
@@ -76,15 +77,15 @@ body {
 }
 
 .cur_location select {
-    width: 100%;
+    width: 80%;
 }
 
 #content {
     float: left;
     clear: both;
     margin: 10px 0 3px 0;
-    width: 260px;
-    height: 310px;
+    /* width: 260px; */
+    /* height: 310px; */
     background: #fff;
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -94,7 +95,7 @@ body {
 ul.options {
     float: left;
     clear: both;
-    width: 240px;
+    /* width: 240px; */
     height: auto;
     list-style: none;
     margin: 35px 0;
@@ -104,7 +105,7 @@ ul.options {
 ul.options li {
     float:left;
     clear:both;
-    width:260px;
+    /* width:260px; */
     display:block;
     margin:20px 0 0 0;
     font-size:25px;
@@ -120,27 +121,33 @@ ul.options li:hover{ background-color:#eee;}
 
 ul.options li:last-child{ margin-bottom:0;}
 
-ul.options li a{ float:left; clear:both; display:block; width:175px; height:80%; padding:25px 0 0 85px;}
+ul.options li a{ float:left; clear:both; display:block; /* width:175px; */ height:80%; padding:25px 0 0 85px;}
 
 .traffic{ background:url(traffic.png) no-repeat 20px 15px;  }
-.parking{ background:url(car.png) no-repeat 20px 15px;}
+.parking{
+    background:url(car.png) no-repeat 20px 15px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size:18px;
+    padding-top:5px;
+}
 
 select{ font-size:11px;}
 
 
-h1.traffic{ float:left; clear:left; width:100%; font-size:24px; color:#aaa; padding:5px 0 0 45px; background:url(traffic_small.png) no-repeat 0 0; height:35px; margin:7px 0 0 10px;}
-h1.parking{ float:left; clear:left; width:100%; font-size:24px; color:#aaa; padding:5px 0 0 45px; background:url(car_small.png) no-repeat 0 0; height:35px; margin:7px 0 0 10px;}
+h1.traffic{ float:left; clear:left; width:80%; font-size:24px; color:#aaa; padding:5px 0 0 45px; background:url(traffic_small.png) no-repeat 0 0; height:35px; margin:7px 0 0 10px;}
+h1.parking{ float:left; clear:left; width:80%; font-size:24px; color:#aaa; padding:5px 0 0 45px; background:url(car_small.png) no-repeat 0 0; height:35px; margin:7px 0 0 10px;}
 
 
 a img{ border:0;}
-a.full{ display:block; width:260px; height:100%;}
+a.full{ display:block; /* width:260px; */ height:100%;}
 
 
 ul.inner_page{
 float:left;
 clear:both;
-width:260px;
-height:180px;
+/* width:260px; */
+/* height:180px; */
 list-style:none;
 margin:0 0 5px 0;
 padding:0;
@@ -150,7 +157,7 @@ overflow:hidden;
 ul.inner_page li{
 float:left;
 clear:both;
-width:240px;
+/* width:240px; */
 display:block;
 margin:0;
 padding:5px 10px 5px 10px;
@@ -179,7 +186,7 @@ font-size:15px;
 float:left;
 clear:both;
 margin:0;
-width:260px;
+/* width:260px; */
 padding:0;
 background-color: #ccc;   background-image: -moz-linear-gradient(100% 100% 90deg, #ccc, #eee) !important; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#eee)) !important;
 font-size:12px;
@@ -191,7 +198,7 @@ border:none;
 background-color: #eee;   background-image: -moz-linear-gradient(100% 100% 90deg, #eee, #ccc) !important; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eee), to(#ccc)) !important;
 }
 
-#see_more a{ text-decoration:none; width:260px; height:100%; display:block; padding:5px 0 5px 0;}
+#see_more a{ text-decoration:none; /* width:260px;*/ height:100%; display:block; padding:5px 0 5px 0;}
 
 .slots{
 float:left;
