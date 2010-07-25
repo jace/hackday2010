@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Traffic Around Me</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function selectcam(url, name) {
+        var cam = document.querySelector('#cam');
+        var camname = document.querySelector('#camname');
+        cam.setAttribute("onerror", "this.onerror = null; this.src = '{{ url_for('static', filename='oops.jpg') }}';");
+        cam.setAttribute("alt", name);
+        cam.setAttribute("src", url);
+        camname.innerHTML = name;
+      }
+
+      function setcamlist(data) {
+        var sel = document.querySelector('#camlist');
+        selectcam(data[0].imgurl, data[0].name);
+        for (var counter in data) {
+          item = data[counter];
+          opt = document.createElement("option");
+          opt.appendChild(document.createTextNode(item['name']));
+          opt.setAttribute('value', item.imgurl);
+          sel.appendChild(opt);
+        }
+        sel.className = 'showninline';
+        sel.setAttribute('onchange', "selectcam(this.value, this.options[this.selectedIndex].innerHTML);");
+      }
+
+      function setylocation(data) {
+        var y = document.querySelector('#ylocation');
+        result = data.query.results.Result
+        y.innerHTML = result.line1 + ', ' + result.line2;
+      }
+
+      function geosuccess(position) {
+        var a = document.querySelector('#acquiring');
+        var f = document.querySelector('#found');
+        // var l = document.querySelector('#location');
+        var y = document.querySelector('#ylocation');
+        a.className = 'hidden';
+        f.className = 'shown';
+        // l.innerHTML = position.coords.latitude + ', ' + position.coords.longitude;  
+
+        var url1 = '{{ url_for('findcamera') }}?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&jsonp=setcamlist';
+        var script1 = document.createElement("script");
+        script1.setAttribute("src", url1);
+        script1.setAttribute("type", "text/javascript");
+        document.body.appendChild(script1);
+
+        var url2 = 'http://query.yahooapis.com/v1/public/yql?q=use%20%22http%3A%2F%2Fgithub.com%2Fyql%2Fyql-tables%2Fraw%2Fmaster%2Fgeo%2Fgeo.placefinder.xml%22%20as%20placefinder%3B%20select%20*%20from%20placefinder%20where%20q%3D%22' + position.coords.latitude + ', ' + position.coords.longitude + '%22&format=json&diagnostics=true&callback=setylocation'
+        var script2 = document.createElement("script");        
+        script2.setAttribute("src", url2);
+        script2.setAttribute("type", "text/javascript");                
+        document.body.appendChild(script2);
+      }
+
+      function geoerror() {
+        var a = document.querySelector('#acquiring');
+        var e = document.querySelector('#found');
+        a.className = 'hidden';
+        e.className = 'shown';
+      }
+    </script>
+    <div id="center">
+      <div id="app">
+        <div id="logo">
+          <img src="{{ url_for('static', filename='pin.png') }}"/>
+        </div>
+        <p id="acquiring" class="shown">
+          Acquiring location...
+        </p>
+        <p id="notfound" class="hidden">
+          Your browser does not support geolocation.
+        </p>
+        <div id="found" class="hidden">
+          <div class="cur_location"><select id="camlist"></select></div>
+        </div>
+        <div id="content">
+          <h1 class="traffic">See Traffic</h1>
+          <div class="live_feed">
+            <div>
+              <span id="ylocation">Getting address...</span>
+            </div>
+            <img id="cam" width="250" height="175" src="{{ url_for('static', filename='loading.jpg') }}" alt=""/>
+            <h2 id="camname">&nbsp;</h2>
+          </div>
+          <h1 class="parking">
+            <a href="{{ url_for('parking') }}">Find Parking</a>
+          </h1>
+        </div> <!-- content -->
+        <div id="credits">Made at Yahoo! Open Hack Day 2010</div>
+      </div> <!-- app -->
+    </div> <!-- center -->
+    <script type="text/javascript">
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(geosuccess, geoerror);
+      } else {
+        geoerror();
+      }
+    </script>
+  </body>
+</html>
