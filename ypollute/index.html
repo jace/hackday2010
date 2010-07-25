@@ -6,16 +6,31 @@
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 
+function setDistance(data) {
+  var venue=document.getElementById("eventvenue").value;
+  var name=document.getElementById("pname").value;
+  var location=document.getElementById("ploc").value;
+  var transport=document.getElementById("mot").value;
+  var distance=data.query.results.p.content;
+  var co2=0;
+
+  document.getElementById("pname").value="";
+  document.getElementById("ploc").value="";
+  document.getElementById("mot").value="";  
+
+  AppendRow(name,location,transport,distance,co2);
+}
+
 function GetValues(){
-var name=document.getElementById("pname").value;
+// XXX: Calculate distance here
+var venue=document.getElementById("eventvenue").value;
 var location=document.getElementById("ploc").value;
-var transport=document.getElementById("mot").value;
-
-document.getElementById("pname").value="";
-document.getElementById("ploc").value="";
-document.getElementById("mot").value="";  
-
-AppendRow(name,location,transport);
+var url1 = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fisithackday.com%2Fhacks%2Fgeo%2Fdistance%2Findex.php%3Fplace1%3D' + venue + '%26place2%3D' + location + '%22%20and%20xpath%3D%22%2Fhtml%2Fbody%2Fdiv%2Fdiv%5B2%5D%2Fp%5B3%5D%22&format=json&diagnostics=true&callback=setDistance';
+var script1 = document.createElement("script");
+script1.setAttribute("src", url1);
+script1.setAttribute("type", "text/javascript");
+document.body.appendChild(script1);
+// setDistance({query: {results: {p: {content: 'is (124 km) or so'}}}});
 }
 
 function AppendTD()
@@ -24,8 +39,7 @@ function AppendTD()
     return td;
 }
 
-
-function AppendRow(name,location,transport)
+function AppendRow(name,location,transport,distance,co2)
 {
         var tblObj = document.getElementById('ptable');
         var tblBody = tblObj.childNodes;
@@ -57,14 +71,12 @@ function AppendRow(name,location,transport)
         cellHTML = "Sea";		
         td.innerHTML = cellHTML;
         tr.appendChild(td);
-       /*     
-        var td = AppendTD();
-        var sel = document.createElement('select');
 
-        sel.setAttribute("id", "dd"+index+"1");
-        sel.setAttribute("name", "dd"+index+"1");
-        sel.className='';
-         */             
+        // adding distance
+        var td = AppendTD();
+        td.innerHTML = distance;
+        lastRow.appendChild(td);
+        
         tblBody[index+1].appendChild(tr);
         return false;
 }
@@ -117,7 +129,6 @@ function AppendRow(name,location,transport)
                                  <span class="alignleft margin10 clearleft"><span class="field_title">Transport</span> <select class="mot" id="mot"><option value="1">Air</option><option value="2">Road</option><option value="3">Rail</option><option value="4">Sea</option></select></span>                       
                                     
                                  <span class="alignleft margin10 clearleft" style="margin-left:200px;"><input type="submit" value="Add" onclick="GetValues();" /></span>
-                                 
                                  
                                  <div id="participant_info" class="margin10">
                                  
