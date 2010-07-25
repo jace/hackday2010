@@ -12,7 +12,7 @@
         var camname = document.querySelector('#camname');
         cam.setAttribute("onerror", "this.onerror = null; this.src = '{{ url_for('static', filename='oops.jpg') }}';");
         cam.setAttribute("alt", name);
-        cam.setAttribute("src", url);
+        cam.setAttribute("src", url + '?date=' + Date().toString()); // Throw in a date to invalidate cache
         camname.innerHTML = name;
       }
 

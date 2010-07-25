@@ -2,23 +2,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Traffic Around Me</title>
-    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+    <title>Trafficam</title>
+    <style type="text/css">
+      .hidden {
+        display: none;
+      }
+      .shown {
+        display: block;
+      }
+      .showninline {
+        display: inline;
+      }
+      #logo {
+        float: left;
+      }
+      #content {
+        clear: left;
+      }
+      #camname {
+        font-weight: bold;
+      }
+      #camloc {
+        font-style: italic;
+      }
+      #credits {
+        font-size: smaller;
+        margin-top: 0.5em;
+        color: #888;
+      }        
+    </style>
   </head>
   <body>
     <script type="text/javascript">
-      function selectcam(url, name) {
+      function selectcam(url, name, location) {
         var cam = document.querySelector('#cam');
         var camname = document.querySelector('#camname');
+        var camloc = document.querySelector('#camloc');
         cam.setAttribute("onerror", "this.onerror = null; this.src = '{{ url_for('static', filename='oops.jpg') }}';");
         cam.setAttribute("alt", name);
         cam.setAttribute("src", url);
         camname.innerHTML = name;
+        camloc.innerHTML = location;
       }
 
       function setcamlist(data) {
         var sel = document.querySelector('#camlist');
-        selectcam(data[0].imgurl, data[0].name);
+        selectcam(data[0].imgurl, data[0].name, data[0].location);
         for (var counter in data) {
           item = data[counter];
           opt = document.createElement("option");
@@ -27,7 +57,7 @@
           sel.appendChild(opt);
         }
         sel.className = 'showninline';
-        sel.setAttribute('onchange', "selectcam(this.value, this.options[this.selectedIndex].innerHTML);");
+        sel.setAttribute('onchange', "selectcam(this.value, this.options[this.selectedIndex].innerHTML, '');");
       }
 
       function setylocation(data) {
@@ -65,34 +95,34 @@
         e.className = 'shown';
       }
     </script>
-    <div id="center">
-      <div id="app">
-        <div id="logo">
-          <img src="{{ url_for('static', filename='pin.png') }}"/>
-        </div>
-        <p id="acquiring" class="shown">
-          Acquiring location...
-        </p>
-        <p id="notfound" class="hidden">
-          Your browser does not support geolocation.
-        </p>
-        <div id="found" class="hidden">
-          <div class="cur_location"><select id="camlist"></select></div>
-        </div>
-        <div id="content">
-          <h1 class="traffic">See Traffic</h1>
-          <div class="live_feed">
-            <div>
-              <span id="ylocation">Getting address...</span>
-            </div>
-            <img id="cam" width="250" height="175" src="{{ url_for('static', filename='loading.jpg') }}" alt=""/>
-            <h2 id="camname">&nbsp;</h2>
+    <div id="main">
+      <div id="logo">
+        <img width="35" height="35" alt="Logo" src="{{ url_for('static', filename='traffic_small.png') }}"/>
+      </div>
+      <p id="acquiring" class="shown">
+        Acquiring location...
+      </p>
+      <p id="notfound" class="hidden">
+        Your browser does not support geolocation.
+      </p>
+      <div id="found" class="hidden">
+        Your location:<br/>
+        <div class="cur_location"><select id="camlist"></select></div>
+      </div>
+      <div id="content">
+        <div class="live_feed">
+          <div>
+            <span id="ylocation">Getting address...</span>
           </div>
-          <h1 class="parking">
-            <a href="{{ url_for('parking') }}">Find Parking</a>
-          </h1>
-        </div> <!-- content -->
-        <div id="credits">Made at Yahoo! Open Hack Day 2010</div>
+          <img id="cam" width="250" height="175" src="{{ url_for('static', filename='loading.jpg') }}" alt=""/><br/>
+          <div id="camname">&nbsp;</div>
+          <div id="camloc">&nbsp;</div>
+        </div>
+      </div> <!-- content -->
+      <div id="credits">
+        Made at Yahoo! Open Hack Day 2010.
+        <a href="http://github.com/jace/hackday2010">Github</a>.
+      </div>
       </div> <!-- app -->
     </div> <!-- center -->
     <script type="text/javascript">
