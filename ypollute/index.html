@@ -6,6 +6,15 @@
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 
+var total_distance = 0;
+var total_co2 = 0;
+
+function setData(){
+  document.getElementById("ename").innerHTML=document.getElementById("eventname").value;
+  document.getElementById("eloc").innerHTML=document.getElementById("eventvenue").value;
+  document.getElementById("eventdata").style.display = 'none';
+}
+
 function GetValues(){
 var name=document.getElementById("pname").value;
 var location=document.getElementById("ploc").value;
@@ -15,7 +24,14 @@ document.getElementById("pname").value="";
 document.getElementById("ploc").value="";
 document.getElementById("mot").value="";  
 
-AppendRow(name,location,transport);
+var distance=Math.floor(Math.random()*10000);
+var co2=Math.floor(Math.random()*43);
+
+total_distance = total_distance + distance;
+total_co2 = total_co2 + co2;
+
+AppendRow(name,location,transport,distance,co2);
+document.getElementById("total_carbon_fp").innerHTML= Math.floor(Math.random()*((total_distance * total_co2)/984));
 }
 
 function AppendTD()
@@ -25,7 +41,7 @@ function AppendTD()
 }
 
 
-function AppendRow(name,location,transport)
+function AppendRow(name,location,transport,distance,co2)
 {
         var tblObj = document.getElementById('ptable');
         var tblBody = tblObj.childNodes;
@@ -57,15 +73,20 @@ function AppendRow(name,location,transport)
         cellHTML = "Sea";		
         td.innerHTML = cellHTML;
         tr.appendChild(td);
-       /*     
-        var td = AppendTD();
-        var sel = document.createElement('select');
-
-        sel.setAttribute("id", "dd"+index+"1");
-        sel.setAttribute("name", "dd"+index+"1");
-        sel.className='';
-         */             
         tblBody[index+1].appendChild(tr);
+        
+        //adding fourth column
+        var td = AppendTD();
+        cellHTML = distance;
+        td.innerHTML = cellHTML;
+        tr.appendChild(td);
+
+        //adding fourth column
+        var td = AppendTD();
+        cellHTML = co2;
+        td.innerHTML = cellHTML;
+        tr.appendChild(td);   
+        
         return false;
 }
 
@@ -86,7 +107,7 @@ function AppendRow(name,location,transport)
         	<div id="center">
 				<div id="form">
         		
-                	<div class="section" style="padding-bottom:10px;">
+                	<div id="eventdata" class="section" style="padding-bottom:10px;">
                     	<h3 class="section_title">Event Details</h3>
                         	<div class="clr"></div>
                                 
@@ -94,15 +115,14 @@ function AppendRow(name,location,transport)
 
                                 <span class="alignleft margin10" id="event_venue"><label for="eventvenue">Event Venue</label><input type="text" name="EventVenue" id="eventvenue" size="30" /></span>
                                 
-                                <span class="alignright margin10" id="done_button"><input type="submit" value="Done" /></span>
+                                <span class="alignright margin10" id="done_button"><input type="submit" value="Done" onclick="setData();" /></span>
                                 
-                                <span class="alignleft margin10" id="display_event_name"></span>
 
-                                <span class="alignleft margin10" id="display_event_venue"></span>
                                                        
                     </div> <!-- end of first section -->
                     
-                    
+                                <h2><span class="section_title" id="ename"></span></h2>
+                                <h4><span class="section_title" id="eloc"></span></h4>
                     
                     <div class="section">
                     	<h3 class="section_title">Participant Details</h3>
@@ -118,13 +138,7 @@ function AppendRow(name,location,transport)
                                     
                                  <span class="alignleft margin10 clearleft" style="margin-left:200px;"><input type="submit" value="Add" onclick="GetValues();" /></span>
                                  
-                                 
-                                 <div id="participant_info" class="margin10">
-                                 
-                                 	John Doe : <strong>0.05 tons</strong>                                 
-                                 
-                                 </div>
-
+                               
                               </span> <!-- end of col -->
                               
                               
@@ -151,10 +165,10 @@ function AppendRow(name,location,transport)
                     
                     </div> <!-- end of second section -->
                     
-                    
-                    
+                   
                     <div class="section blurb">
-                    	Total Carbon Footprint : <strong>0.10 tons</strong>
+                    	Total Carbon Footprint : <strong><span id="total_carbon_fp">0.10</span> tons</strong>
+                    	<center><a href="reduce.html" style="color:green;">Ways to reduce the footprint</a></center>
                     </div>
                 
                 
