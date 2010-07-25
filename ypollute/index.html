@@ -10,28 +10,33 @@ var total_distance = 0;
 var total_co2 = 0;
 
 function setData(){
+
   document.getElementById("ename").innerHTML=document.getElementById("eventname").value;
   document.getElementById("eloc").innerHTML=document.getElementById("eventvenue").value;
   document.getElementById("eventdata").style.display = 'none';
+
 }
 
 function GetValues(){
-var name=document.getElementById("pname").value;
-var location=document.getElementById("ploc").value;
-var transport=document.getElementById("mot").value;
 
-document.getElementById("pname").value="";
-document.getElementById("ploc").value="";
-document.getElementById("mot").value="";  
+  var venue=document.getElementById("eventvenue").value;
+  var name=document.getElementById("pname").value;
+  var location=document.getElementById("ploc").value;
+  var transport=document.getElementById("mot").value;
 
-var distance=Math.floor(Math.random()*10000);
-var co2=Math.floor(Math.random()*43);
+  document.getElementById("pname").value="";
+  document.getElementById("ploc").value="";
+  document.getElementById("mot").value="";  
 
-total_distance = total_distance + distance;
-total_co2 = total_co2 + co2;
+  var distance=Math.floor(Math.random()*10000);
+  var co2=Math.floor(Math.random()*43);
 
-AppendRow(name,location,transport,distance,co2);
-document.getElementById("total_carbon_fp").innerHTML= Math.floor(Math.random()*((total_distance * total_co2)/984));
+  total_distance = total_distance + distance;
+  total_co2 = total_co2 + co2;
+
+  AppendRow(name,location,transport,distance,co2);
+  document.getElementById("total_carbon_fp").innerHTML= Math.floor(Math.random()*((total_distance * total_co2)/984));
+
 }
 
 function AppendTD()
@@ -39,7 +44,6 @@ function AppendTD()
     var td = document.createElement("td");
     return td;
 }
-
 
 function AppendRow(name,location,transport,distance,co2)
 {
@@ -73,7 +77,6 @@ function AppendRow(name,location,transport,distance,co2)
         cellHTML = "Sea";		
         td.innerHTML = cellHTML;
         tr.appendChild(td);
-        tblBody[index+1].appendChild(tr);
         
         //adding fourth column
         var td = AppendTD();
@@ -87,11 +90,10 @@ function AppendRow(name,location,transport,distance,co2)
         td.innerHTML = cellHTML;
         tr.appendChild(td);   
         
+        tblBody[index+1].appendChild(tr);
+        
         return false;
 }
-
-
-
 
 </script>
 </head>
@@ -138,7 +140,6 @@ function AppendRow(name,location,transport,distance,co2)
                                     
                                  <span class="alignleft margin10 clearleft" style="margin-left:200px;"><input type="submit" value="Add" onclick="GetValues();" /></span>
                                  
-                               
                               </span> <!-- end of col -->
                               
                               
@@ -167,8 +168,8 @@ function AppendRow(name,location,transport,distance,co2)
                     
                    
                     <div class="section blurb">
-                    	Total Carbon Footprint : <strong><span id="total_carbon_fp">0.10</span> tons</strong>
-                    	<center><a href="reduce.html" style="color:green;">Ways to reduce the footprint</a></center>
+                    	Total Carbon Footprint : <strong><span id="total_carbon_fp">0.00</span> tons</strong>
+                    	<center><a href="reduce.html" style="color:green; target="_blank" >Ways to reduce the footprint</a></center>
                     </div>
                 
                 
