@@ -29,3 +29,18 @@ Live at [http://hackday.freecrow.org/trafficam](http://hackday.freecrow.org/traf
 [mgeo]: http://www.mongodb.org/display/DOCS/Geospatial+Indexing
 [BTIS.in]: http://btis.in/
 [Flask]: http://flask.pocoo.org/
+
+### RepMeter
+
+Representative Meter is one single index to know how your representative is performing in power. Get to know his daily attendance, his personal assets variations betweens elections, his participation debates & discussions in the house. 
+
+It's power back to YOU!
+
+Live at [http://hackday.freecrow.org/mp](http://hackday.freecrow.org/mp)
+
+
+### YPollute
+
+Event carbon footprint calculator inspired by YSlow. Provides suggestions on means to reduce carbon footprint. Designed as an API that can be used by event websites to display carbon statistics.
+
+Live at [http://hackday.freecrow.org/ypollute](http://hackday.freecrow.org/ypollute)
